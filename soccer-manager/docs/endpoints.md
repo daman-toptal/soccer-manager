@@ -9,6 +9,14 @@ other endpoints.
 |---------|--------|----------------|
 | Login| `POST` | `/v1/login` |
 
+```
+POST
+{
+  "email": "abc@xyz.com",
+  "password": "1234567",
+}
+```
+
 ## User
 
 These endpoints return information about the users of our service.
@@ -17,6 +25,13 @@ These endpoints return information about the users of our service.
 |---------|--------|----------------|
 | Get user by Id | `GET` | `/v1/user/{id}` |
 | Update user by Id | `PATCH` | `/v1/user/{id}` |
+
+```
+PATCH
+{
+  "name": "Abc Xyz",
+}
+```
 
 ## Player
 
@@ -28,6 +43,24 @@ These endpoints are used to get and update information about a player, check lis
 | Update player by Id | `PATCH` | `/v1/player/{id}` |
 | Get listed players | `GET` | `/v1/player/listed` |
 | Buy player | `POST` | `/v1/player/buy` |
+
+```
+PATCH
+{
+  "first_name": "Abc",
+  "last_name": "Xyz",
+  "country": "USA",
+  "is_listed": true,
+  "ask_value": "10.00"
+}
+
+POST
+{
+  "player_id": "ply-xxx-yyy-zzzz",
+  "description": "Buy player",
+}
+```
+
 
 ## Team
 
