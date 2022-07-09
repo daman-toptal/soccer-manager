@@ -1,0 +1,31 @@
+syntax = "proto3";
+package protobuf.transfer;
+
+option go_package = "protobuf-v1/golang/transfer";
+
+import "google/protobuf/timestamp.proto";
+import "currency.proto";
+
+message Transfer {
+  string id = 1;
+  string team_id = 2;
+  string other_team = 3;
+  int64  amount = 4;
+  string player_id = 5;
+  google.protobuf.Timestamp created_at = 6;
+  protobuf.Currency currency = 7;
+}
+
+message GetRequest {
+  string id = 1;
+}
+
+message CreateRequest {
+  string player_id = 1;
+  string team_id = 2;
+}
+
+service TransferService {
+  rpc Get(GetRequest) returns (Transfer);
+  rpc Create(CreateRequest) returns (Transfer);
+}

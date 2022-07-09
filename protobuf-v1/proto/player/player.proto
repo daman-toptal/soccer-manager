@@ -1,0 +1,62 @@
+syntax = "proto3";
+package protobuf.player;
+
+option go_package = "protobuf-v1/golang/player";
+
+import "google/protobuf/wrappers.proto";
+import "currency.proto";
+
+enum PlayerType {
+  PT_UNSPECIFIED = 0;
+  PT_GOAL_KEEPER = 1;
+  PT_DEFENDER = 2;
+  PT_MID_FIELDER = 3;
+  PT_ATTACKER = 4;
+}
+
+message Player {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  int32 age = 4;
+  PlayerType type = 5;
+  string country = 6;
+  string team_id = 7;
+  int64  value = 8;
+  bool is_listed = 9;
+  google.protobuf.Int64Value ask_value = 10;
+  protobuf.Currency currency = 11;
+}
+
+message Players {
+  int32 total = 1;
+  repeated  Player players = 2;
+}
+
+message GetRequest {
+  string id = 1;
+}
+
+message GetByTeamRequest {
+  string team_id = 1;
+}
+
+message GetListedRequest {
+}
+
+message UpdateRequest {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string country = 4;
+  google.protobuf.BoolValue is_listed = 5;
+  google.protobuf.Int64Value ask_value = 6;
+  google.protobuf.Int64Value value = 7;
+}
+
+service PlayerService {
+  rpc Get(GetRequest) returns (Player);
+  rpc Update(UpdateRequest) returns (Player);
+  rpc GetByTeam(GetByTeamRequest) returns (Players);
+  rpc GetListed(GetListedRequest) returns (Players);
+}

@@ -1,0 +1,33 @@
+syntax = "proto3";
+package protobuf.external.player;
+
+option go_package = "protobuf-v1/golang/external/player";
+
+import "google/protobuf/wrappers.proto";
+
+message Player {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  int32 age = 4;
+  string type = 5;
+  string country = 6;
+  string team_id = 7;
+  string value = 8;
+  bool is_listed = 9;
+  google.protobuf.StringValue ask_value = 10;
+  string currency = 11;
+}
+
+message Players {
+  int32 total = 1;
+  repeated  Player players = 2;
+}
+
+message UpdateRequest {
+  string first_name = 2;
+  string last_name = 3;
+  string country = 4;
+  google.protobuf.BoolValue is_listed = 5;
+  google.protobuf.StringValue ask_value = 6;
+}

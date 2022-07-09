@@ -1,0 +1,19 @@
+syntax = "proto3";
+package protobuf.external.team;
+
+option go_package = "protobuf-v1/golang/external/team";
+
+message Team {
+  string id = 1;
+  string name = 2;
+  string country = 3;
+  string value = 4;
+  string budget = 5;
+  string user_id = 6;
+  string currency = 7;
+}
+
+message UpdateRequest {
+  string name = 1;
+  string country = 2;
+}

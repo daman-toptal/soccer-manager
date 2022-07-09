@@ -1,0 +1,21 @@
+syntax = "proto3";
+package protobuf;
+
+option go_package = "protobuf-v1/golang";
+
+enum Error {
+  ERROR_UNSPECIFIED = 0;
+  ERROR_AUTH_ERROR = 100;
+  ERROR_TOKEN_HEADER_REQUIRED = 101;
+  ERROR_TOKEN_INVALID = 102;
+  ERROR_TOKEN_ERROR = 103;
+  ERROR_NOT_FOUND = 104;
+  ERROR_INVALID_ARGS = 105;
+  ERROR_INVALID_ID = 106;
+  ERROR_INTERNAL_ERROR = 107;
+}
+
+message HttpError {
+  Error code = 1;
+  string message = 2;
+}

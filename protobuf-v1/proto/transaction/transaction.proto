@@ -1,0 +1,51 @@
+syntax = "proto3";
+package protobuf.transaction;
+
+option go_package = "protobuf-v1/golang/transaction";
+
+import "google/protobuf/timestamp.proto";
+import "currency.proto";
+
+enum TransactionType {
+  TT_UNSPECIFIED = 0;
+  TT_BUY = 1;
+  TT_SELL = 2;
+}
+
+message Transaction{
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string team_id = 4;
+  int64  amount = 6;
+  int64  budget = 7;
+  string player_id = 8;
+  TransactionType type = 9;
+  google.protobuf.Timestamp created_at = 10;
+  protobuf.Currency currency = 11;
+}
+
+message Transactions {
+  int32 total = 1;
+  repeated Transaction transactions = 2;
+}
+
+message GetRequest {
+  string id = 1;
+}
+
+message GetByTeamRequest {
+  string team_id = 1;
+}
+
+message BuyRequest {
+  string team_id = 1;
+  string player_id = 2;
+  string description = 3;
+}
+
+service TransactionService {
+  rpc Get(GetRequest) returns (Transaction);
+  rpc Buy(BuyRequest) returns (Transaction);
+  rpc GetByTeam(GetByTeamRequest) returns (Transactions);
+}

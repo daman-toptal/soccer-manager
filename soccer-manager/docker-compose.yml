@@ -1,0 +1,52 @@
+version: '3.5'
+
+services:
+
+  # Services
+  soccer-manager-internal:
+    restart: always
+    build:
+      dockerfile: ./cmd/docker/grpc/Dockerfile
+      context: ./
+    depends_on:
+      - datastore
+    ports:
+      - "3001:3001"
+    environment:
+      MICRO_SERVER_ADDRESS: ":3001"
+      DB_HOST: "mongodb://mongo:mongo@datastore:27017/?connect=direct&replicaSet=rs0"
+
+  soccer-manager-external:
+    restart: always
+    build:
+      dockerfile: ./cmd/docker/external/Dockerfile
+      context: ./
+    depends_on:
+      - datastore
+      - soccer-manager-internal
+    ports:
+      - "3000:3000"
+    environment:
+      MICRO_SERVER_ADDRESS: ":3000"
+
+  # Database tier
+  datastore:
+    restart: always
+    image: mongo:4.4
+    container_name: datastore
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+      - MONGO_LOG_DIR=/dev/null
+    healthcheck:
+      test: test $$(/scripts/rs-init.sh)
+      start_period: 5s
+      interval: 10s
+    volumes:
+      - ./mongodb/data/db:/data/db
+      - ./mongodb:/opt/keyfile/
+      - ./mongodb/rs-init.sh:/scripts/rs-init.sh
+    command: "--bind_ip_all --logpath=/dev/null --keyFile /opt/keyfile/keyfile --replSet rs0"
+    ports:
+      - "27017:27017"

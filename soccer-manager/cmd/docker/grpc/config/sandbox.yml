@@ -1,0 +1,27 @@
+name: soccer-manager-internal
+
+server:
+  grpcPort: 3001
+
+BCRYPT_COST: 10
+
+JWT_KEY: WBDu-UwGuzLKPL-xbHQEAKoF7fx1ZdA9r8Ohn2Y5BSU
+
+jwt:
+  expirationSeconds: 10000
+
+team:
+  value: 2000000000
+  budget: 500000000
+  goalKeepers: 3
+  defenders: 6
+  midFielders: 6
+  attackers: 5
+
+player:
+  maxAge: 40
+  minAge: 18
+  value: 100000000
+
+log:
+  level: DEBUG

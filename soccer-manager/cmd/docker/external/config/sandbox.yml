@@ -1,0 +1,11 @@
+name: soccer-manager-external
+
+server:
+  httpPort: 3000
+
+grpc:
+  port: 3001
+  name: soccer-manager-internal
+
+log:
+  level: DEBUG

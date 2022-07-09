@@ -1,0 +1,20 @@
+syntax = "proto3";
+package protobuf.external.transfer;
+
+option go_package = "protobuf-v1/golang/external/transfer";
+
+import "google/protobuf/timestamp.proto";
+
+message Transfer {
+  string id = 1;
+  string team_id = 2;
+  string other_team = 3;
+  string amount = 4;
+  string player_id = 5;
+  google.protobuf.Timestamp created_at = 6;
+  string currency = 7;
+}
+
+message CreateRequest {
+  string player_id = 1;
+}

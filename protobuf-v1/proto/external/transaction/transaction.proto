@@ -1,0 +1,29 @@
+syntax = "proto3";
+package protobuf.external.transaction;
+
+option go_package = "protobuf-v1/golang/external/transaction";
+
+import "google/protobuf/timestamp.proto";
+
+message Transaction{
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string team_id = 4;
+  string amount = 6;
+  string type = 7;
+  string budget = 8;
+  string player_id = 9;
+  google.protobuf.Timestamp created_at = 10;
+  string currency = 11;
+}
+
+message Transactions {
+  int32 total = 1;
+  repeated Transaction transactions = 2;
+}
+
+message BuyRequest {
+  string player_id = 1;
+  string description = 2;
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+package protobuf;
+
+option go_package = "protobuf-v1/golang";
+
+enum Currency {
+  CURRENCY_UNSPECIFIED = 0;
+  CURRENCY_USD = 1;
+}

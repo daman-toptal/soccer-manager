@@ -1,0 +1,34 @@
+syntax = "proto3";
+package protobuf.team;
+
+option go_package = "protobuf-v1/golang/team";
+
+import "currency.proto";
+import "google/protobuf/wrappers.proto";
+
+message Team {
+  string id = 1;
+  string name = 2;
+  string country = 3;
+  int64  value = 4;
+  int64  budget = 5;
+  string user_id = 6;
+  protobuf.Currency currency = 7;
+}
+
+message GetRequest {
+  string id = 1;
+}
+
+message UpdateRequest {
+  string id = 1;
+  string name = 2;
+  string country = 3;
+  google.protobuf.Int64Value budget = 4;
+  google.protobuf.Int64Value value = 5;
+}
+
+service TeamService {
+  rpc Get(GetRequest) returns (Team);
+  rpc Update(UpdateRequest) returns (Team);
+}

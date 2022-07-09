@@ -1,0 +1,57 @@
+build-proto-root:
+	mkdir -p ./golang
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/*.proto
+
+build-proto-internal-login: build-proto-root
+	mkdir -p ./golang/login
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/login/*.proto
+
+build-proto-internal-user: build-proto-root
+	mkdir -p ./golang/user
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/user/*.proto
+
+build-proto-internal-transfer: build-proto-root
+	mkdir -p ./golang/transfer
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/transfer/*.proto
+
+build-proto-internal-transaction: build-proto-root
+	mkdir -p ./golang/transaction
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/transaction/*.proto
+
+build-proto-internal-team: build-proto-root
+	mkdir -p ./golang/team
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/team/*.proto
+
+build-proto-internal-player: build-proto-root
+	mkdir -p ./golang/player
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/player/*.proto
+
+build-proto-external-login: build-proto-root
+	mkdir -p ./golang/external/login
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/external/login/*.proto
+
+build-proto-external-user: build-proto-root
+	mkdir -p ./golang/external/user
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/external/user/*.proto
+
+build-proto-external-transfer: build-proto-root
+	mkdir -p ./golang/external/transfer
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/external/transfer/*.proto
+
+build-proto-external-transaction: build-proto-root
+	mkdir -p ./golang/external/transaction
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/external/transaction/*.proto
+
+build-proto-external-team: build-proto-root
+	mkdir -p ./golang/external/team
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/external/team/*.proto
+
+build-proto-external-player: build-proto-root
+	mkdir -p ./golang/external/player
+	protoc --go_out=./golang/  --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative  --go-grpc_out=./golang/ --proto_path=./proto ./proto/external/player/*.proto
+
+build-proto-external: build-proto-external-login build-proto-external-user build-proto-external-transfer build-proto-external-transaction  build-proto-external-team build-proto-external-player
+
+build-proto-internal: build-proto-internal-login build-proto-internal-user build-proto-internal-transfer build-proto-internal-transaction  build-proto-internal-team build-proto-internal-player
+
+build-proto-all: build-proto-external build-proto-internal
